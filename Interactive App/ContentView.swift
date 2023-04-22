@@ -8,14 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var name = ""
+    @State private var titleText = "What is your name?"
+    @State private var presentAlert = false
+    @State private var age = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        VStack(spacing: 100.0) {
+            Text(titleText)
+            TextField("Type name...", text: $name)
+                .multilineTextAlignment(.center)
+                .font(.title)
+                    .border(Color.gray, width: 1)
+                    .padding()
+            Text("How old are you?")
+            TextField("Age", text: $age)
+                .multilineTextAlignment(.center)
+                .font(.title)
+                    .border(Color.black, width: 1)
+                    .padding()
+            Button("Submit Name") {
+                titleText = "Welcome, \(name)!"
+            }
+            .font(.title2)
+            .buttonStyle(.borderedProminent)
+            .tint(.brown)
+            }
+        Button("Alert") {
+            // 2
+            presentAlert = true
         }
-        .padding()
+        .alert("You can do anything!", isPresented: $presentAlert, actions: { // 3
+        })
     }
 }
 
